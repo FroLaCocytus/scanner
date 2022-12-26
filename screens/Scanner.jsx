@@ -21,11 +21,18 @@ export const Scanner = ( { navigation } ) => {
         })();
     }, [])
 
+    const arrKeys = ["floor", "number", "street", "link"]
     const handleBarCodeScanned = ({type, data}) => {
         const text = data;
         try{
             const obj = JSON.parse(text);
-            if (obj.isQR === true) {
+            if (
+                arrKeys.toString() === Object.keys(obj).toString() &&
+                typeof obj.number === "number" &&
+                typeof obj.floor === "number" &&
+                typeof obj.street === "string" &&
+                typeof obj.link === "string"
+            ) {
                 navigation.navigate('Plan', {data: obj})
             } else {
                 setScanned(true)
@@ -35,7 +42,6 @@ export const Scanner = ( { navigation } ) => {
             setScanned(true)
 
         }
-        //alert(`Bar Code With Type ${type} and data ${data} has been scanned!`)
     }
 
     if (hasPermission === null){
@@ -63,7 +69,7 @@ export const Scanner = ( { navigation } ) => {
                         {scanned ?
                             <View style={styles.focused1}>
                                 <TouchableOpacity onPress={()=> setScanned(false)} style={{height:"100%",width:"100%", justifyContent:"center", alignItems: "center"}}>
-                                    {scanned &&<Image style={{filter: "invert(1)" ,width: "80%", height:"80%", resizeMode: "contain", opacity: 0.5}} source={require('../assets/refresh.png')} />}
+                                    {scanned &&<Image style={{width: "80%", height:"80%", resizeMode: "contain", opacity: 0.5}} source={require('../assets/refresh.png')} />}
                                 </TouchableOpacity>
                             </View>
                             :

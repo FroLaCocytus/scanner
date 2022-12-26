@@ -34,7 +34,7 @@ export const Plan = ({navigation, route}) => {
     return (
         <View>
             <PlanView>
-                <PlanImage style={{resizeMode: 'contain'}} source={{uri: route.params.data.link}}/>
+                <PlanImage style={{resizeMode: 'contain'}} source={{uri: `https://drive.google.com/uc?export=view&id=${route.params.data.link}`}}/>
             </PlanView>
             <DescriptionView>
                 <View>
