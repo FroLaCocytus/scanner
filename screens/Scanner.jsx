@@ -45,11 +45,16 @@ export const Scanner = ( { navigation } ) => {
     }
 
     if (hasPermission === null){
-        return <Text>Отправляем запрос на доступ к камере</Text>
+        return <View></View>
     }
 
     if (hasPermission === false){
-        return <Text>Нет доступа к камере</Text>
+        return (
+            <View style={{height:"100%", width:"100%", justifyContent: "center", alignItems:"center"}}>
+                <Text style={{fontSize:30}}>Нет доступа к камере</Text>
+                <Text style={{fontSize:16, textAlign: "center", marginTop: "10%"}}>Перейдите в настройки приложения и откройте доступ к камере</Text>
+            </View>
+        )
     }
     return (
         <View>
